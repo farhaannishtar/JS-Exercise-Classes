@@ -42,7 +42,21 @@ class Airplane {
 */
 
 class Person {
-  
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
+  eat(food) {
+    if(this.stomach.length < 10)
+      this.stomach.push(food);
+  }
+  poop() {
+    this.stomach = [];
+  }
+  toString() {
+    return `${this.name}, ${this.age}`;
+  }
 }
 
 /*
@@ -52,6 +66,7 @@ class Person {
         + should initialize with a `tank` at 0
         + should initialize with an `odometer` at 0
     - Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`.
+
     - Give cars ability to `.drive(distance)`. The distance driven:
         + Should cause the `odometer` to go up.
         + Should cause the the `tank` to go down taking `milesPerGallon` into account.
@@ -60,7 +75,25 @@ class Person {
 */
 
 class Car {
-  
+  constructor(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill(gallons) {
+    this.tank += gallons;
+  }
+  drive(distance) {
+    this.odometer += distance;
+    const gallonsUsed = distance / this.milesPerGallon;
+    if (gallonsUsed >= this.tank) {
+
+      return `I ran out of fuel at ${this.odometer} miles`;
+    } else {
+      this.tank -= gallonsUsed;
+    }
+  }
 }
 
 /*
